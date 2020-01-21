@@ -12,7 +12,7 @@ public class TechJobs {
 
     private static Scanner in = new Scanner(System.in);
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
 
         // Initialize our field map with key/name pairs
         HashMap<String, String> columnChoices = new HashMap<>();
@@ -61,9 +61,15 @@ public class TechJobs {
                 System.out.println("\nSearch term: ");
                 String searchTerm = in.nextLine();
 
+                // Searching
+//                boolean searchFound = false;
+
+
                 if (searchField.equals("all")) {
-                    System.out.println("Search all fields not yet implemented.");
+                    printJobs(JobData.findByValue(searchTerm));
+
                 } else {
+
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
             }
@@ -104,23 +110,55 @@ public class TechJobs {
                 validChoice = true;
             }
 
-        } while(!validChoice);
+        } while (!validChoice);
 
         return choiceKeys[choiceIdx];
     }
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
-
-        for (HashMap<String, String> entry : someJobs) {
-            System.out.println("*****");
-            for (Map.Entry<String, String> job : entry.entrySet()) {
-                System.out.println(job.getKey() + ":1 (" + job.getValue() + ")");
+        if (someJobs.isEmpty()) {
+            System.out.println("No Jobs Found.");
+        } else {
+            for (HashMap<String, String> entry : someJobs) {
+                System.out.println("*****");
+                for (Map.Entry<String, String> job : entry.entrySet()) {
+                    System.out.println(job.getKey() + ": " + job.getValue());
+                }
             }
-
-
+            System.out.println("*****");
         }
-        System.out.println("*****");
     }
-
 }
+
+
+
+
+
+
+//        if (hashmap.containsKey(searchTerm)==true) {
+//                searchFound = true;
+//                for (Map.Entry<String,ArrayList> entries : hashmap.entrySet()) {
+//        if (entries.getValue().contains(searchTerm)) {
+//        System.out.println(entries.getKey() + " contains " + searchTerm);
+//        }
+//        }
+//        }
+
+//        for (HashMap<String, String> entry : someJobs) {
+//                        for (Map.Entry<String, String> job : entry.entrySet()) {
+//                            if (entry.getKey().contains(searchTerm)) {
+////                                System.out.println(entry.getKey() + searchTerm);
+//                                System.out.println(job.getKey() + ": " + job.getValue());
+//                            }
+//                            if (entry.getValue().contains(searchTerm)){
+//                                System.out.println(job.getKey() + ": " + job.getValue());
+//                            }
+//
+//                        }
+
+//                    else{
+//                        System.out.println("Search all fields not yet implemented.");
+//                        printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
+//                    }
+
